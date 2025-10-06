@@ -76,6 +76,11 @@ jobs:
 
         $xml.Save($file)
 
+    - name: Install Windows 10 SDK
+      run: |
+            choco install windows-sdk-10-version-1809-all -y
+            shell: powershell
+
     # Create the app package by building and packaging the project
     - name: Build App Packages
       run: msbuild $env:ProjectFile_Name /p:Configuration=$env:Configuration /p:GeneratePackageOnBuild=False /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle /p:AppxBundlePlatforms="x86|x64|ARM" /p:PackageCertificateKeyFile=GitHubActionsWorkflow.pfx /p:AppxPackageDir="$env:Appx_Package_Dir" /p:GenerateAppxPackageOnBuild=true /p:PackageCertificateThumbprint=$env:AppxThumbprint
