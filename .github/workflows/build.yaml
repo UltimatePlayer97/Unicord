@@ -79,7 +79,7 @@ jobs:
     - name: Install Windows 10 SDK
       run: |
             choco install windows-sdk-10-version-1809-all -y
-            shell: powershell
+      shell: powershell
 
     # Create the app package by building and packaging the project
     - name: Build App Packages
