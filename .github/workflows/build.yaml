@@ -2,9 +2,9 @@ name: Build
 
 on:
   push:
-    branches: [ redesign ]
+    branches: [redesign]
   pull_request:
-    branches: [ redesign ]
+    branches: [redesign]
 
 jobs:
   build:
@@ -62,9 +62,11 @@ jobs:
           $node.SetAttribute("Version", $version.ToString())
           $xml.Save($file)
 
-      # Ensure MSBuild uses Visual Studio with UWP workload
-      - name: Setup MSBuild (UWP‑aware)
-        uses: microsoft/setup-msbuild@v2
+      # Install UWP Workload
+      - name: Install Visual Studio UWP Workload
+        run: |
+          choco install visualstudio2022-workload-universal --yes --limit-output
+        shell: powershell
 
       # Build App Packages
       - name: Build App Packages
